@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch} from 'react-redux'
+import { MProvider} from './store/redux_store'
+import {fetchPokemons} from './store/slicePokemons'
+import { Navigator} from './components'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return ( 
+    <MProvider>
+      <>
+        <Scheduler />
+        <Navigator />
+      </>
+    </MProvider>
+  )
+}
+
+function Scheduler() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchPokemons())
+  }, [])
+
+  return <></>;
 }
 
 export default App;
