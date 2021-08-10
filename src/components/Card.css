@@ -1,0 +1,27 @@
+:root {
+  --off-grey: #ddd;
+}
+.card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--off-grey);
+  transition-duration: 0.5s;
+  cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.1);
+}
+.card .card-image {
+  display: block;
+  width: 90%;
+  object-fit: contain;
+}
+.card .card-name {
+  border-top: 3px solid var(--off-grey);
+  width: 100%;
+  text-align: center;
+  background-color: var(--off-grey);
+}
