@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { MProvider } from './store/redux_store';
+import { MProvider } from './store/reduxStore';
 import { fetchPokemons } from './store/slicePokemons';
 import { Navigator } from './components';
 

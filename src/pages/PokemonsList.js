@@ -5,7 +5,7 @@ import { fetchPokemons } from '../store/slicePokemons';
 import { Card } from '../components';
 import { getIdFromPokenUrl } from '../helper/helps';
 import { Modal } from '../components/Modal';
-import './pokemons-list.css';
+import './PokemonsList.css';
 
 export function PokemonsList() {
   const { selected, dataFilter, onClickPokemons, onCloseModal } =
