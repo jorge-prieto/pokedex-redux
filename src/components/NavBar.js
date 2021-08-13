@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import './navbar.css';
 import LOGO from '../assets/pokemon-logo.png';
 import { appendFilter } from '../store/slicePokemons';
+import './navbar.css';
 
 export function NavBar() {
   const [text, setText] = useState('');

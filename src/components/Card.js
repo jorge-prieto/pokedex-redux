@@ -1,6 +1,7 @@
+import React from 'react';
+import { getIdFromPokenUrl } from '../helper/helps';
 import { images } from '../Services';
 import './Card.css';
-import { getIdFromPokenUrl } from '../helper/helps';
 
 export function Card({ name, url, onClick }) {
   const image =

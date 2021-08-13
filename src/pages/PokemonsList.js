@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemons } from '../store/slicePokemons';
+
 import { Card } from '../components';
 import { getIdFromPokenUrl } from '../helper/helps';
 import { Modal } from '../components/Modal';
 import './pokemonsList.css';
 
 export function PokemonsList() {
-  const { selected, data_filtered, onClickPokemons, onCloseModal } =
+  const { selected, dataFilter, onClickPokemons, onCloseModal } =
     useManager();
 
   return (
     <div>
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
       <div className='grid-list'>
-        {data_filtered.map((element, index) => (
+        {dataFilter.map((element, index) => (
           <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} />
         ))}
       </div>
@@ -25,22 +26,22 @@ export function PokemonsList() {
 const search = (array, text) =>
   array.filter((element) => !element.name.toLowerCase().indexOf(text.toLowerCase()));
 
-function useManager() {
-  const [selected, setSelect] = useState();
+const useManager = () => {
+  const [selected, setSelected] = useState();
   const dispatch = useDispatch();
-  const { array, textfilter } = useSelector((state) => state.pokemons);
-  const data_filtered = search(array, textfilter);
+  const { array, textFilter } = useSelector((state) => state.pokemons);
+  const dataFilter = search(array, textFilter);
 
-  function next() {
+  const next = () => {
     dispatch(fetchPokemons());
   }
 
-  function onClickPokemons(url) {
-    setSelect(url);
+  const onClickPokemons = (url) => {
+    setSelected(url);
   }
 
-  function onCloseModal() {
-    setSelect(null);
+  const onCloseModal = () => {
+    setSelected(null);
   }
 
   useEffect(() => {
@@ -63,5 +64,5 @@ function useManager() {
     document.body.style.overflow = !!selected ? 'hidden' : 'unset';
   }, [selected]);
 
-  return { selected, data_filtered, onClickPokemons, onCloseModal };
+  return { selected, dataFilter, onClickPokemons, onCloseModal };
 }

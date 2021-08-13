@@ -5,7 +5,7 @@ const url_begin = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20';
 const initialState = {
   array: [],
   next: url_begin,
-  textfilter: '',
+  textFilter: '',
 };
 
 const slicePokemons = createSlice({
@@ -19,7 +19,7 @@ const slicePokemons = createSlice({
       state.next = payload;
     },
     putFilterText(state, { payload }) {
-      state.textfilter = payload;
+      state.textFilter = payload;
     },
   },
 });

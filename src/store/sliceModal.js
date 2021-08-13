@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     left: null,
     right: null,
-    is_compared: false,
+    isCompared: false,
 }
 
 const sliceModal = createSlice({
@@ -17,12 +17,12 @@ const sliceModal = createSlice({
             state.right = { ...payload }
         },
         initCompare(state) {
-            state.is_compared = true
+            state.isCompared = true
         },
         clearModal(state) {
             state.left = null
             state.right = null
-            state.is_compared = false
+            state.isCompared = false
         }
     }
 })
@@ -36,9 +36,9 @@ export const modalReducer = reducer;
 
 export const fetchPoken = (url) => async (dispatch, getState) => {
     const { modal } = getState();
-    const { is_compared } = modal;
+    const { isCompared } = modal;
     const data = await getPokenInf(url)
-    if (is_compared) {
+    if (isCompared) {
         dispatch(appendRightPokemon(data))
         return;
     }
