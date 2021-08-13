@@ -5,7 +5,7 @@ import { getImage } from '../helper/helps';
 import { Compared } from './Compare';
 import './Modal.css';
 
-export function Modal({ visible, url, onClose }) {
+export function Modal ({ visible, url, onClose }) {
   const { left, right, isCompared, initialCompare, closeAndClean } =
     useManager(url, onClose);
 

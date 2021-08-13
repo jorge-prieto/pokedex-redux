@@ -5,7 +5,7 @@ import {
   Link
 } from 'react-router-dom'
 
-import { NavBar } from './NavBar'
+import { NavBar } from './NavigationBar'
 import { Home, PokemonsList} from '../pages'
 
 export function Navigator() {

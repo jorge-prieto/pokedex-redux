@@ -1,13 +1,10 @@
 import React from 'react';
 import { getIdFromPokenUrl } from '../helper/helps';
-import { images } from '../Services';
+import { images } from '../service';
 import './Card.css';
 
 export function Card({ name, url, onClick }) {
-  const image =
-    images +
-    getIdFromPokenUrl(url) +
-    '.png';
+  const image = images + getIdFromPokenUrl(url) + '.png';
 
   function pressed(event) {
     event.preventDefault();

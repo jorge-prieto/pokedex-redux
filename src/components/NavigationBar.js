@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import LOGO from '../assets/pokemon-logo.png';
 import { appendFilter } from '../store/slicePokemons';
-import './navbar.css';
+import './NavigationBar.css';
 
 export function NavBar() {
   const [text, setText] = useState('');

@@ -1,4 +1,4 @@
-import { images } from "../Services"
+import { images } from "../service"
 
 export const getIdFromPokenUrl = (url) => url.split('/')[6]
 
