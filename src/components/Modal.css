@@ -40,9 +40,14 @@
 .container .row {
   flex-direction: row;
 }
+
 .container .between {
   justify-content: space-between;
 }
+.container .around {
+  justify-content: space-around;
+}
+
 .container .center {
   justify-content: center;
   align-items: center;

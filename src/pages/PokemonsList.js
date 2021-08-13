@@ -44,6 +44,7 @@ function useManager() {
   }
 
   useEffect(() => {
+    next();
     window.addEventListener('scroll', () => {
       if (
         window.innerHeight + document.documentElement.scrollTop ===
