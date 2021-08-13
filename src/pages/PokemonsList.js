@@ -1,60 +1,66 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchPokemons } from '../store/slicePokemons'
-import { Card } from '../components'
-import { getIdFromPokenUrl } from '../helper/helps'
-import { Modal } from '../components/Modal'
-import './pokemonsList.css'
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPokemons } from '../store/slicePokemons';
+import { Card } from '../components';
+import { getIdFromPokenUrl } from '../helper/helps';
+import { Modal } from '../components/Modal';
+import './pokemonsList.css';
 
 export function PokemonsList() {
-  const { selected, data_filtered, onClickPokemons, onCloseModal} = useManager()
+  const { selected, data_filtered, onClickPokemons, onCloseModal } =
+    useManager();
 
   return (
     <div>
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
-      <div className='grid-list'>{
-        data_filtered.map((el, i) => <Card key={i} name={el.name} url={el.url} onClick={onClickPokemons} />)
-      }</div>
+      <div className='grid-list'>
+        {data_filtered.map((element, index) => (
+          <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-const search = (array, text) => array.filter(el => !el.name.toLowerCase().indexOf(text.toLowerCase()))
+const search = (array, text) =>
+  array.filter((element) => !element.name.toLowerCase().indexOf(text.toLowerCase()));
 
 function useManager() {
-  const [selected, setSelect] = useState()
-  const dispatch = useDispatch()
-  const { array, textfilter } = useSelector(state => state.pokemons)
-  const data_filtered = search(array, textfilter)
+  const [selected, setSelect] = useState();
+  const dispatch = useDispatch();
+  const { array, textfilter } = useSelector((state) => state.pokemons);
+  const data_filtered = search(array, textfilter);
 
   function next() {
-    dispatch(fetchPokemons())
+    dispatch(fetchPokemons());
   }
 
   function onClickPokemons(url) {
-    setSelect(url)
+    setSelect(url);
   }
 
   function onCloseModal() {
-    setSelect(null)
+    setSelect(null);
   }
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        next()
+    window.addEventListener('scroll', () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop ===
+        document.documentElement.offsetHeight
+      ) {
+        next();
       }
-    })
+    });
 
     return () => {
-      window.removeEventListener('scroll', () => {})
-    }
-  }, [])
+      window.removeEventListener('scroll', () => {});
+    };
+  }, []);
 
   useEffect(() => {
-    document.body.style.overflow = !!selected ? 'hidden' : 'unset'
-  }, [selected])
+    document.body.style.overflow = !!selected ? 'hidden' : 'unset';
+  }, [selected]);
 
-
-  return { selected, data_filtered, onClickPokemons, onCloseModal }
+  return { selected, data_filtered, onClickPokemons, onCloseModal };
 }
