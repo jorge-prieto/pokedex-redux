@@ -47,8 +47,7 @@
   align-items: center;
 }
 .container .image {
-  position: fixed;
-  width: 25%;
+  width: 10rem;
 }
 .container .wrap {
   flex-flow: row wrap;
@@ -57,4 +56,7 @@
   margin: 5px;
   padding: 5px;
   background-color: var(--off-white);
+}
+.table {
+  display: table;
 }

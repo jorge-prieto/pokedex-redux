@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPoken, initCompare, clearModal } from '../store/sliceModal';
 import { getImage } from '../helper/helps';
@@ -28,7 +28,9 @@ export function Modal ({ visible, url, onClose }) {
         ) : (
           <PokenDescription {...left} />
         )}
-        <div>FOOTER</div>
+        <div>
+          FOOTER  
+        </div>
       </div>
     </div>
   ) : (
@@ -79,29 +81,33 @@ function PokenDescription({
   types,
 }) {
   return (
-    <div>
-      <img src={getImage(id)} className='image' />
-      <p>{desc}</p>
-      <table>
-        <tr>
-          <th>Height</th>
-          <th>Weight</th>
-          <th>Gender</th>
-          <th>Abilities</th>
-          <th>Type</th>
-        </tr>
-        <tr>
-          <td>{height}</td>
-          <td>{weight}</td>
-          <td>{gender === 0 ? 'Male' : 'Female'}</td>
-          <td>
-            <List data={abilities} />
-          </td>
-          <td>
-            <List data={types} />
-          </td>
-        </tr>
-      </table>
+    <div className='flex row'>
+      <div>
+        <img src={getImage(id)} className='image' />
+      </div>
+      <div>
+        <p>{desc}</p>
+        <div className='table'>
+          <tr>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Gender</th>
+            <th>Abilities</th>
+            <th>Type</th>
+          </tr>
+          <tr>
+            <td>{height} m</td>
+            <td>{weight} kg</td>
+            <td>{gender === 0 ? 'Male' : 'Female'}</td>
+            <td>
+              <List data={abilities} />
+            </td>
+            <td>
+              <List data={types} />
+            </td>
+          </tr>
+        </div>
+      </div>
     </div>
   );
 }

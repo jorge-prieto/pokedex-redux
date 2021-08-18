@@ -18,7 +18,7 @@ export function NavBar() {
   return (
     <div className='nav'>
       <div>
-        <img src={LOGO} alt='Pokemon logo' className='img-logo' />
+        <Link to='/' > <img src={LOGO} alt='Pokemon logo' className='img-logo'  /> </Link>
       </div>
       <div className='row'>
         <div className='center'>

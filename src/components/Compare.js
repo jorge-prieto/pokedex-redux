@@ -12,8 +12,8 @@ export const Compared = ({ left, right }) => {
     return (
       <div className='flex column '>
         <div className='flex row between'>
-          <img src={getImage(left?.id)} />
-          <img src={getImage(right?.id)} />
+          <img src={getImage(left?.id)} alt='Pokemon icon' />
+          <img src={getImage(right?.id)} alt='Pokemon icon' />
         </div>
         <div>
           {Object.keys(fields).map((camp, ident) => (
