@@ -52,6 +52,7 @@ async function getPokenInf(url) {
     const response1 = await fetch(data?.species?.url);
     const data2 = await response1.json();
     const abilities = data?.abilities.map((el) => el?.ability?.name);
+    const stats = data?.stats;
     const types = data?.types.map((el) => el.type?.name);
     const desc = data2?.flavor_text_entries[0]?.flavor_text;
     const gender = data2?.gender_rate;
@@ -61,6 +62,7 @@ async function getPokenInf(url) {
       types,
       desc,
       gender,
+      stats,
     };
   } catch (e) {
     return null;

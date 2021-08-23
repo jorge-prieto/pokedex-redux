@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemons } from '../store/slicePokemons';
 
-import { Card } from '../components';
+import { Card, Sidebar } from '../components';
 import { getIdFromPokenUrl } from '../helper/helps';
 import { Modal } from '../components/Modal';
-import './PokemonsList.css';
+import './pokemonsList.css';
+import '../components/Sidebar.css'
 
 export function PokemonsList() {
-  const { selected, dataFilter, onClickPokemons, onCloseModal } =
+  const { selected, dataFilter, isCompared, pRight, onClickPokemons, onCloseModal } =
     useManager();
 
   return (
     <div>
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
-      <div className='grid-list'>
-        {dataFilter.map((element, index) => (
-          <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} />
-        ))}
+      <div className="grid-2col">
+        <div className='grid-list'>
+          {dataFilter.map((element, index) => (
+            <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} className='proof'/>
+          ))}
+        </div>
+        {(isCompared && !(!!pRight)) && <Sidebar />}
       </div>
     </div>
   );
@@ -30,6 +34,7 @@ const useManager = () => {
   const [selected, setSelected] = useState();
   const dispatch = useDispatch();
   const { array, textFilter } = useSelector((state) => state.pokemons);
+  const { isCompared, right } = useSelector((state) => state.modal)
   const dataFilter = search(array, textFilter);
 
   const next = () => {
@@ -64,5 +69,5 @@ const useManager = () => {
     document.body.style.overflow = !!selected ? 'hidden' : 'unset';
   }, [selected]);
 
-  return { selected, dataFilter, onClickPokemons, onCloseModal };
+  return { selected, dataFilter, isCompared, pRight: right, onClickPokemons, onCloseModal };
 }

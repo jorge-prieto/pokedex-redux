@@ -1,0 +1,44 @@
+.sidebar {
+    position: sticky;
+    top: 146px;
+    right: 40px;
+    height: 15vh;
+}
+.sidebar .content {
+    position: fixed;
+    width: 25vw;
+    right: 40px;
+    border: 1px solid;
+    background-color: var(--card);
+}
+.sidebar .content .poke-title {
+    padding-left: 0.5em;
+    border-bottom: 1px solid;
+}
+.sidebar .content .poke-name {
+    padding-left: 0.5em;
+}
+
+@media (min-width: 769px) {
+    .sidebar {
+        border: none;
+        top: 74px;
+        right: 5px;
+    }
+    .sidebar .content {
+        border: none;
+        right: 5px;
+        width: 10vw;
+        border-bottom: 1px solid;
+        background-color: transparent;
+    }
+    .sidebar .content .poke-title {
+        padding-left: 0.5em;
+        border-bottom: none;
+    }
+    .sidebar .content .poke-name {
+        border: 1px solid;
+        border-radius: 5px;
+        background-color: var(--card);
+    }
+}

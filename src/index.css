@@ -7,8 +7,9 @@
   --red: #ff0000;
   --gray: #909090;
   --off-grey: #ddd;
-  --background: rgb(85, 214, 214);
-  --shadow: rgba(0, 0, 0, 0.3);
+  --background: rgba(255, 127, 80, 0.8);
+  --shadow: rgba(0, 0, 0, 0.2);
+  --card: rgba(127, 255, 212,0.8);
 }
 
 body {

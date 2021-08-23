@@ -20,7 +20,7 @@ function Scheduler() {
 
   useEffect(() => {
     dispatch(fetchPokemons());
-  }, []);
+  }, [dispatch]);
 
   return <></>;
 }

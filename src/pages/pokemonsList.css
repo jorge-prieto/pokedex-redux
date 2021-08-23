@@ -1,6 +1,24 @@
 .grid-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 2em;
-  padding: 2em;
+  padding: 1em;
+}
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+}
+
+@media (min-width: 769px) {
+  .grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 2em;
+    padding: 4em;
+    place-content: center;
+  }
+  .grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+  }
 }

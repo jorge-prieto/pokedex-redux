@@ -1,4 +1,5 @@
 .main-container {
+  height: 90vh;
   background-color: var(--off-white);
 }
 .home-container {
@@ -7,12 +8,15 @@
   align-items: center;
 }
 .button {
-  height: 2rem;
+  width: 20vw;
+  height: 5vh;
   border: solid 0.1rem var(--orange);
   border-radius: 0.5rem;
-  background-color: var(--off-white);
+  font-weight: 900;
+  background-color: var(--orange);
+  color: var(--black);
 }
-button:hover {
+.button:hover {
   background-color: var(--yellow);
   color: var(--red);
   cursor: pointer;
@@ -22,7 +26,13 @@ button:hover {
 }
 
 @media (max-width: 767px) {
+  .main-container {
+    height: 77vh;
+  }
+  .button {
+    width: 50vw;
+  }
   .img {
-    height: 20rem;
+    height: 60vh;
   }
 }
