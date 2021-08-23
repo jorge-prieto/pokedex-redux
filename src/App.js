@@ -1,45 +1,21 @@
-import React, { useEffect } from 'react';
-//import { useDispatch } from 'react-redux';
-import { MProvider } from './store/reduxStore';
+import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-//import { fetchPokemons } from './store/slicePokemons';
-//import { Navigator } from './components';
+
+import { MProvider } from './store/reduxStore';
 import { Home } from './pages';
 import { PokemonsList } from './pages';
-
+import { NotFound } from './pages/NotFound';
 
 const App = () => (
   <MProvider>
-    <HashRouter basename="/">
+    <HashRouter basename='/'>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/pokemons" component={PokemonsList} />
+        <Route path='/' exact component={Home} />
+        <Route path='/pokemons' component={PokemonsList} />
+        <Route path="*" exact component={NotFound} />
       </Switch>
     </HashRouter>
   </MProvider>
 );
-
-
-
-/*function App() {
-  return (
-    <MProvider>
-      <>
-        <Scheduler />
-        <Navigator />
-      </>
-    </MProvider>
-  );
-} */
-
-/* function Scheduler() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPokemons());
-  }, [dispatch]);
-
-  return <></>;
-} */
 
 export default App;
