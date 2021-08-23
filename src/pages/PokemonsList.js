@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemons } from '../store/slicePokemons';
 
+import { NavBar } from '../components/NavigationBar';
 import { Card, Sidebar } from '../components';
-import { getIdFromPokenUrl } from '../helper/helps';
 import { Modal } from '../components/Modal';
 import './pokemonsList.css';
 import '../components/Sidebar.css'
@@ -14,6 +14,7 @@ export function PokemonsList() {
 
   return (
     <div>
+      <NavBar />
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
       <div className="grid-2col">
         <div className='grid-list'>
