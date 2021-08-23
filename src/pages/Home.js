@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { NavBar } from '../components/NavigationBar';
 import Background from '../assets/pokemon-background.png';
 import './Home.css';
 
 export function Home() {
   return (
     <div className='main-container'>
+      <NavBar />
       <div className='home-container'>
         <div className='text-container'>
           <h1>Welcome to PokeApp</h1>
