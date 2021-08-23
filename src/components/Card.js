@@ -13,8 +13,8 @@ export function Card({ name, url, onClick }) {
 
   return (
     <div className='card' onClick={pressed}>
-      <img src={image} className='card-image' alt='Pokemon'/>
-      <div className='card-name'>{name}</div>
+      <img src={image} className='card-image' alt='Pokemon' />
+      <div className='card-name'>{name.toUpperCase()}</div>
     </div>
   );
 }

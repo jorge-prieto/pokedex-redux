@@ -1,35 +1,66 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPoken, initCompare, clearModal } from '../store/sliceModal';
-import { getImage } from '../helper/helps';
-import { Compared } from './Compare';
-import './Modal.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPoken, initCompare, clearModal } from "../store/sliceModal";
+import { getImage } from "../helper/helps";
+import { Compared } from "./Compare";
+import { Charts } from "./Chart";
+import Close from "../assets/cancel.png";
+import "./Modal.css";
 
-export function Modal ({ visible, url, onClose }) {
-  const { left, right, isCompared, initialCompare, closeAndClean } =
-    useManager(url, onClose);
+/**
+ * stats: [
+ * {
+ *  base_stat: number,
+ *  stat: {
+ *    name: string
+ *  }
+ * }
+ * ]
+ * hp, attack, defense, special-attack, special-defense, speed
+ */
+
+const normal = (stats) =>
+  stats?.reduce((acc, el) => [...acc, `${el.stat.name},${el.base_stat}`], []) || [];
+
+export function Modal({ visible, url, onClose }) {
+  const { left, right, isCompared, initialCompare, closeAndClean } = useManager(
+    url,
+    onClose
+  );
+
+  const chartLeft = normal(left?.stats)
+  const chartRight = normal(right?.stats)
 
   return visible && !!left ? (
-    <div className='container'>
-      <div className='content flex column'>
-        <div className='head'>
-          <div className='flex row center'>
-            <p className='title'>{left?.name.toUpperCase()}</p>
+    <div className="container">
+      <div className="content flex column">
+        <div className="head">
+          <div className="flex row center">
+            <h2 className="title">
+              {isCompared ? "BEING COMPARED ..." : left?.name.toUpperCase()}
+            </h2>
             {!isCompared && (
-              <button onClick={initialCompare}>CompareTo</button>
+              <button onClick={initialCompare} className="compareBtn">
+                Compare to...
+              </button>
             )}
           </div>
-          <a className='btn' onClick={closeAndClean}>
-            X
-          </a>
+          <img
+            src={Close}
+            alt="Close png"
+            className="x-button"
+            onClick={closeAndClean}
+          />
         </div>
-        {isCompared && !!right ? (
-          <Compared left={left} right={right} />
-        ) : (
-          <PokenDescription {...left} />
-        )}
+        <div className="description">
+          {isCompared && !!right ? (
+            <Compared left={left} right={right} className="compared-list" />
+          ) : (
+            <PokenDescription {...left} />
+          )}
+        </div>
         <div>
-          FOOTER  
+          <Charts titleLeft={left?.name} dataLeft={chartLeft} titleRight={right?.name} dataRight={chartRight} />
         </div>
       </div>
     </div>
@@ -46,7 +77,7 @@ function useManager(url, onClose) {
     if (!!url) {
       dispatch(fetchPoken(url));
     }
-  }, [url]);
+  }, [url, dispatch]);
 
   function initialCompare() {
     dispatch(initCompare());
@@ -65,11 +96,13 @@ const List = ({ data }) => {
   return (
     <ul>
       {data?.map((element, index) => (
-        <li key={index}>{element}</li>
+        <li key={index} className="list">
+          {element}
+        </li>
       ))}
     </ul>
   );
-}
+};
 
 function PokenDescription({
   id,
@@ -81,31 +114,39 @@ function PokenDescription({
   types,
 }) {
   return (
-    <div className='flex row'>
+    <div className="description">
       <div>
-        <img src={getImage(id)} className='image' />
+        <img src={getImage(id)} className="image" />
       </div>
       <div>
-        <p>{desc}</p>
-        <div className='table'>
-          <tr>
-            <th>Height</th>
-            <th>Weight</th>
-            <th>Gender</th>
-            <th>Abilities</th>
-            <th>Type</th>
-          </tr>
-          <tr>
-            <td>{height} m</td>
-            <td>{weight} kg</td>
-            <td>{gender === 0 ? 'Male' : 'Female'}</td>
-            <td>
-              <List data={abilities} />
-            </td>
-            <td>
-              <List data={types} />
-            </td>
-          </tr>
+        <p className="text">{desc}</p>
+        <div className="table">
+          <div className="up-box">
+            <tr>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>Gender</th>
+            </tr>
+            <tr>
+              <td>{height / 10} m</td>
+              <td>{weight / 10} kg</td>
+              <td>{gender < 5 ? "Male" : "Female"}</td>
+            </tr>
+          </div>
+          <div className="low-box">
+            <tr>
+              <th>Abilities</th>
+              <th>Type</th>
+            </tr>
+            <tr>
+              <td>
+                <List data={abilities} />
+              </td>
+              <td>
+                <List data={types} />
+              </td>
+            </tr>
+          </div>
         </div>
       </div>
     </div>

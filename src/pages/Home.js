@@ -17,7 +17,7 @@ export function Home() {
           <Link to='pokemons'>
             <button type='button' className='button'>
               {' '}
-              View All Pokemons{' '}
+              VIEW ALL POKEMONS{' '}
             </button>
           </Link>
         </div>
