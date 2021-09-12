@@ -1,16 +1,14 @@
 import { useSelector } from 'react-redux'
 
-import './Sidebar.css'
-
 export function Sidebar() {
   const left = useSelector((state) => state.modal.left)
   return (
-    <div className="sidebar">
-      <div className="content">
-        <div className='poke-title'>  
+    <div className="sticky top-36 right-10 h-8">
+      <div className="fixed w-1/6 right-10 bg-card border-2 border-solid">
+        <div className=' border-b border-solid pl-2'>  
             <p>Comparing pokemon </p>
         </div>
-        <div className='poke-name'>
+        <div className='pl-2'>
             <p>{String(left.name).toUpperCase()}</p>
         </div>
       </div>

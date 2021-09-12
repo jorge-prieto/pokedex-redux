@@ -4,12 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 
 import LOGO from "../assets/pokemon-logo.png";
 import { appendFilter } from "../store/slicePokemons";
-import "./NavigationBar.css";
+
 
 export function NavBar() {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
-  //const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   function onChange(event) {
     setText(event.target.value);
@@ -17,26 +17,26 @@ export function NavBar() {
   }
 
   return (
-    <div className="nav">
+    <div className="nav sticky top-0 flex flex-col justify-center items-center md:flex-row md:justify-between bg-background z-1 shadow-md">
       <div>
         <Link to="/">
           {" "}
-          <img src={LOGO} alt="Pokemon logo" className="img-logo" />{" "}
+          <img src={LOGO} alt="Pokemon logo" className="img-logo w-48" />{" "}
         </Link>
       </div>
-      <div className="row">
-        <div className="center">
-          <Link className="btn-nav" to="/">
+      <div className="justify-center content-center flex-col md:flex md:items-center md:flex-row ">
+        <div className="flex justify-center items-center">
+          <Link className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red" to="/">
             Home
           </Link>
-          <Link className="btn-nav" to="/pokemons">
+          <Link className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red" to="/pokemons">
             Pokemons
           </Link>
         </div>
-        {/* pathname !== "/" && */ (
+        {pathname !== "/" && (
           <div>
             <input
-              className="search"
+              className="search mt-4 mb-4 w-96 md:w-48 md:p-1 md:mr-4 rounded border-solid "
               type="input"
               placeholder="Search"
               value={text}

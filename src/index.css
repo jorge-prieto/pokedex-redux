@@ -1,16 +1,6 @@
-:root {
-  --black: #000;
-  --orange: #ffa500;
-  --just-white: #fff;
-  --off-white: #faf8f7;
-  --yellow: #ffff00;
-  --red: #ff0000;
-  --gray: #909090;
-  --off-grey: #ddd;
-  --background: rgba(255, 127, 80, 0.8);
-  --shadow: rgba(0, 0, 0, 0.2);
-  --card: rgba(127, 255, 212,0.8);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;

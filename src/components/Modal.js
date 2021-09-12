@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPoken, initCompare, clearModal } from "../store/sliceModal";
-import { getImage } from "../helper/helps";
+
 import { Compared } from "./Compare";
 import { Charts } from "./Chart";
 import Close from "../assets/cancel.png";
-import "./Modal.css";
+import { PokenDescription } from "./PokenDescription";
+
+
 
 /**
  * stats: [
@@ -32,15 +34,15 @@ export function Modal({ visible, url, onClose }) {
   const chartRight = normal(right?.stats)
 
   return visible && !!left ? (
-    <div className="container">
-      <div className="content flex column">
-        <div className="head">
-          <div className="flex row center">
-            <h2 className="title">
+    <div className="flex fixed top-0 left-0 w-screen h-screen justify-center items-center z-1 bg-card">
+      <div className="flex-col block w-2/5 h-5/6 p-5 min-w-1/2 max-w-1/2 bg-off-white rounded-xl border-solid border-off-white shadow-lg border-4">
+        <div className="flex flex-row justify-between border-b-2 border-b-solid border-off-grey pb-2">
+          <div className="flex flex-row justify-center items-center">
+            <h2 className="pl-4 font-bold">
               {isCompared ? "BEING COMPARED ..." : left?.name.toUpperCase()}
             </h2>
             {!isCompared && (
-              <button onClick={initialCompare} className="compareBtn">
+              <button onClick={initialCompare} className="ml-4 p-2 rounded w-4/6 bg-off-grey border-solid border-2 hover:bg-yellow">
                 Compare to...
               </button>
             )}
@@ -48,13 +50,13 @@ export function Modal({ visible, url, onClose }) {
           <img
             src={Close}
             alt="Close png"
-            className="x-button"
+            className="w-8 h-8"
             onClick={closeAndClean}
           />
         </div>
-        <div className="description">
+        <div className="flex justify-center items-center flex-row mt-4">
           {isCompared && !!right ? (
-            <Compared left={left} right={right} className="compared-list" />
+            <Compared left={left} right={right} className="table" />
           ) : (
             <PokenDescription {...left} />
           )}
@@ -90,65 +92,4 @@ function useManager(url, onClose) {
   }
 
   return { initialCompare, closeAndClean, isCompared, left, right };
-}
-
-const List = ({ data }) => {
-  return (
-    <ul>
-      {data?.map((element, index) => (
-        <li key={index} className="list">
-          {element}
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-function PokenDescription({
-  id,
-  desc,
-  height,
-  weight,
-  gender,
-  abilities,
-  types,
-}) {
-  return (
-    <div className="description">
-      <div>
-        <img src={getImage(id)} className="image" />
-      </div>
-      <div>
-        <p className="text">{desc}</p>
-        <div className="table">
-          <div className="up-box">
-            <tr>
-              <th>Height</th>
-              <th>Weight</th>
-              <th>Gender</th>
-            </tr>
-            <tr>
-              <td>{height / 10} m</td>
-              <td>{weight / 10} kg</td>
-              <td>{gender < 5 ? "Male" : "Female"}</td>
-            </tr>
-          </div>
-          <div className="low-box">
-            <tr>
-              <th>Abilities</th>
-              <th>Type</th>
-            </tr>
-            <tr>
-              <td>
-                <List data={abilities} />
-              </td>
-              <td>
-                <List data={types} />
-              </td>
-            </tr>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }

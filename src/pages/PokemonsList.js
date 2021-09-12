@@ -3,10 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchPokemons } from '../store/slicePokemons';
 
 import { Card, Sidebar } from '../components';
-import { getIdFromPokenUrl } from '../helper/helps';
 import { Modal } from '../components/Modal';
-import './pokemonsList.css';
-import '../components/Sidebar.css'
+
 
 export function PokemonsList() {
   const { selected, dataFilter, isCompared, pRight, onClickPokemons, onCloseModal } =
@@ -15,8 +13,8 @@ export function PokemonsList() {
   return (
     <div>
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
-      <div className="grid-2col">
-        <div className='grid-list'>
+      <div className="grid grid-cols-2col md:grid-cols-md-2col">
+        <div className='grid grid-cols-cards gap-8 p-4 md:grid-cols-md-cards md:p-16 md:place-content-center'>
           {dataFilter.map((element, index) => (
             <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} className='proof'/>
           ))}

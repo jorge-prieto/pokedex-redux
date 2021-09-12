@@ -1,6 +1,5 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import './Chart.css'
 
 export const Charts = ({ titleLeft, titleRight, dataLeft, dataRight }) => {
   const normal = (array) =>
@@ -54,8 +53,8 @@ export const Charts = ({ titleLeft, titleRight, dataLeft, dataRight }) => {
   };
 
   return (
-    <div className='header'>
-      <p className='stats-title'> STATS </p>
+    <div className='max-h-12'>
+      <p className='text-center'> STATS </p>
       <Bar data={data} options={options} />
     </div>
   );
