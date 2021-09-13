@@ -11,7 +11,11 @@ const store = configureStore({
   }
 })
 
-export function MProvider({ children}) {
+type Props = {
+  children: JSX.Element,
+};
+
+export function MProvider({ children }: Props) {
   return (
     <Provider store={store}>{children}</Provider>
   )

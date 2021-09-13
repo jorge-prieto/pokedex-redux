@@ -5,13 +5,12 @@ import { Link, useLocation } from "react-router-dom";
 import LOGO from "../assets/pokemon-logo.png";
 import { appendFilter } from "../store/slicePokemons";
 
-
 export function NavBar() {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
-  function onChange(event) {
+  function onChange(event: React.ChangeEvent<HTMLInputElement>) {
     setText(event.target.value);
     dispatch(appendFilter(event.target.value));
   }
@@ -26,10 +25,16 @@ export function NavBar() {
       </div>
       <div className="justify-center content-center flex-col md:flex md:items-center md:flex-row ">
         <div className="flex justify-center items-center">
-          <Link className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red" to="/">
+          <Link
+            className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red"
+            to="/"
+          >
             Home
           </Link>
-          <Link className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red" to="/pokemons">
+          <Link
+            className="btn-nav mr-4 ml-4 no-underline text-black hover:underline hover:text-red"
+            to="/pokemons"
+          >
             Pokemons
           </Link>
         </div>

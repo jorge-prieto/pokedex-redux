@@ -1,13 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, RootStateOrAny } from 'react-redux';
 import { fetchPokemons } from '../store/slicePokemons';
 
 import { Card, Sidebar } from '../components';
 import { Modal } from '../components/Modal';
 
+interface PokeProp {
+  selected: undefined
+  dataFilter: never[]
+  isCompared: boolean
+  pRight: boolean
+  onClickPokemons: (url: React.SetStateAction<undefined>) => void
+  onCloseModal:  () => void
+}
 
 export function PokemonsList() {
-  const { selected, dataFilter, isCompared, pRight, onClickPokemons, onCloseModal } =
+  const { selected, dataFilter, isCompared, pRight, onClickPokemons, onCloseModal } : PokeProp =
     useManager();
 
   return (
@@ -15,8 +23,8 @@ export function PokemonsList() {
       <Modal visible={!!selected} url={selected} onClose={onCloseModal} />
       <div className="grid grid-cols-2col md:grid-cols-md-2col">
         <div className='grid grid-cols-cards gap-8 p-4 md:grid-cols-md-cards md:p-16 md:place-content-center'>
-          {dataFilter.map((element, index) => (
-            <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} className='proof'/>
+          {dataFilter.map((element: { name: string; url: string; }, index: React.Key | null | undefined) => (
+            <Card key={index} name={element.name} url={element.url} onClick={onClickPokemons} />
           ))}
         </div>
         {(isCompared && !(!!pRight)) && <Sidebar />}
@@ -25,26 +33,26 @@ export function PokemonsList() {
   );
 }
 
-const search = (array, text) =>
-  array.filter((element) => !element.name.toLowerCase().indexOf(text.toLowerCase()));
+const search = (array: [], text: string) =>
+  array.filter((element: { name: string; }) => !element.name.toLowerCase().indexOf(text.toLowerCase()));
 
 const useManager = () => {
   const [selected, setSelected] = useState();
   const dispatch = useDispatch();
-  const { array, textFilter } = useSelector((state) => state.pokemons);
-  const { isCompared, right } = useSelector((state) => state.modal)
+  const { array, textFilter } = useSelector((state: RootStateOrAny) => state.pokemons);
+  const { isCompared, right } = useSelector((state: RootStateOrAny) => state.modal)
   const dataFilter = search(array, textFilter);
 
   const next = () => {
     dispatch(fetchPokemons());
   }
 
-  const onClickPokemons = (url) => {
+  const onClickPokemons = (url: React.SetStateAction<undefined>) => {
     setSelected(url);
   }
 
   const onCloseModal = () => {
-    setSelected(null);
+    setSelected(undefined);
   }
 
   useEffect(() => {
