@@ -19,16 +19,30 @@ import { PokenDescription } from "./PokenDescription";
  * hp, attack, defense, special-attack, special-defense, speed
  */
 
-const normal = (stats: any[]) =>
+interface stats {
+  acc:string[],
+  elements: elements[]
+}
+interface elements{
+  base_stat: number;
+  effort?: number;
+  stat:stat[]
+}
+interface stat {
+  name: string;
+  url: string;
+}
+
+const normal = (stats:stats[]) =>
   stats?.reduce(
-    (acc: [], el: { stat: { name: string }; base_stat: number }) => [
+    (acc, elements) => [
       ...acc,
-      `${el.stat.name},${el.base_stat}`,
+      `${elements.stat.name},${elements.base_stat}`,
     ],
     []
   ) || [];
 
-export function Modal(visible: boolean, url: string, onClose: any) {
+export function Modal(visible: boolean, url: string, onClose: () => void) {
   interface Compared {
     left: {
       name: string;
@@ -94,7 +108,7 @@ export function Modal(visible: boolean, url: string, onClose: any) {
   );
 }
 
-function useManager(url: RequestInfo, onClose: () => void) {
+function useManager(url: string, onClose: () => void) {
   const { left, right, isCompared } = useSelector(
     (state: RootStateOrAny) => state.modal
   );

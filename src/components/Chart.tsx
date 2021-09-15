@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 export const Charts = (
   titleLeft: string,
   titleRight: string,
-  dataLeft: string[],
+  dataLeft: [],
   dataRight: []
 ) => {
   const normal = (array: []) =>
@@ -24,7 +24,7 @@ export const Charts = (
   const left = normal(dataLeft);
   const right = normal(dataRight);
 
-  const dataset = (label: string, data: any[], backgroundColor: string) =>
+  const dataset = (label: string, data: string[], backgroundColor: string) =>
     label &&
     data &&
     backgroundColor && {
@@ -34,8 +34,8 @@ export const Charts = (
     };
 
   const push = (
-    array: any[],
-    data: string | { label: string; data: any[]; backgroundColor: string }
+    array: unknown[],
+    data: string | { label: string; data: string[]; backgroundColor: string }
   ) => {
     if (!!data) {
       array.push(data);
