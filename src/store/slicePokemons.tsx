@@ -1,22 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { RootStateOrAny } from "react-redux";
 
-const url_begin = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
+const url_begin: string = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 
-interface Poken {
+interface pokemons {
+  count: number;
   next: string;
-  results: string;
+  previous: boolean;
+  results: result[];
+}
+
+interface result {
+  name: string;
+  url: string;
 }
 
 export const fetchPokemons = createAsyncThunk(
   "pokemons/fetchPokemons",
-  async (_, { dispatch, getState }) => {
+  async (_, { getState }) => {
     try {
       console.log("CARGAR ");
-      const { pokemons } : Poken = getState();
+      const { pokemons }  = getState() as { pokemons: pokemons };
       const response = await fetch(pokemons.next);
       const data = await response.json();
 
-      const { next, results } : Poken = data;
+      const { next, results } = data;
       return {
         next,
         results,
@@ -60,8 +68,8 @@ const { actions, reducer } = slicePokemons;
 const { putFilterText } = actions;
 export const pokemonsReducer = reducer;
 
-export const appendFilter = (text: string) => (dispatch: (arg0: { payload: any; type: string; }) => void) => {
+export const appendFilter = (text: string) => (dispatch: (arg0: { payload: unknown; type: string; }) => void) => {
   try {
     dispatch(putFilterText(text));
-  } catch (error: unknown) {}
+  } catch (error) {}
 };
