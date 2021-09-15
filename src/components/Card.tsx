@@ -8,10 +8,10 @@ interface Card {
   onClick: (url: React.SetStateAction<undefined>) => void;
 }
 
-export function Card({ name, url, onClick }: Card) {
+export const Card = ({ name, url, onClick }: Card) => {
   const image = images + getIdFromPokenUrl(url) + ".png";
 
-  function pressed(event: { preventDefault: () => void }) {
+  const pressed = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     onClick(url);
   }
