@@ -1,30 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootStateOrAny } from "react-redux";
+import { pokemons } from "../interfaces/pokemon";
 
 const url_begin: string = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
-
-interface pokemons {
-  count: number;
-  next: string;
-  previous: boolean;
-  results: result[];
-}
-
-interface result {
-  name: string;
-  url: string;
-}
 
 export const fetchPokemons = createAsyncThunk(
   "pokemons/fetchPokemons",
   async (_, { getState }) => {
     try {
-      console.log("CARGAR ");
       const { pokemons }  = getState() as { pokemons: pokemons };
-      const response = await fetch(pokemons.next);
+      const response: Response = await fetch(pokemons.next);
       const data = await response.json();
 
-      const { next, results } = data;
+      const { next, results } : pokemons = data;
       return {
         next,
         results,

@@ -1,18 +1,10 @@
 import React from "react";
 import { List } from "./List";
 import { getImage } from "../helper/helps";
+import { Left } from "../interfaces/leftRight";
 
-interface PokeAttributes {
-  id: number;
-  desc: string;
-  height: number;
-  weight: number;
-  gender: number;
-  abilities: [];
-  types: string;
-}
 
-export function PokenDescription({
+export const PokenDescription: React.FC<Left>= ({
   id,
   desc,
   height,
@@ -20,7 +12,7 @@ export function PokenDescription({
   gender,
   abilities,
   types,
-}: PokeAttributes) {
+}: Left) => {
   return (
     <div className="flex justify-center items-center flex-row mt-4">
       <div>

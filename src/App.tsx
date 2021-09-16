@@ -4,7 +4,7 @@ import { MProvider } from './store/reduxStore';
 import { fetchPokemons } from './store/slicePokemons';
 import { Navigator } from './components';
 
-function App() {
+const App: React.FC = () => {
   return (
     <MProvider>
       <>

@@ -1,9 +1,13 @@
 import React from "react";
 
-export const List = (data: []) => {
+interface data {
+  data: unknown[]
+}
+
+export const List: React.FC<data> = (data: data) => {
   return (
     <ul>
-      {data?.map((element: string, index: React.Key | null | undefined) => (
+      {data?.map((element: string, index: number) => (
         <li key={index} className="list">
           {element}
         </li>

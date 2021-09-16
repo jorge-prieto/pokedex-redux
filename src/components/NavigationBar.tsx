@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import LOGO from "../assets/pokemon-logo.png";
 import { appendFilter } from "../store/slicePokemons";
 
-export function NavBar() {
+export const NavBar: React.FC = () => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const { pathname } = useLocation();

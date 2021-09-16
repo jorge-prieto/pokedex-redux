@@ -1,13 +1,23 @@
+import { EmptyObject } from "chart.js/types/basic";
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-export const Charts = (
+import { Left, Right } from "../interfaces/leftRight";
+
+interface Props {
   titleLeft: string,
   titleRight: string,
-  dataLeft: [],
-  dataRight: []
+  dataLeft: never[],
+  dataRight: never[]
+}
+
+export const Charts: React.FC<Props> = (
+  {titleLeft,
+  titleRight,
+  dataLeft,
+  dataRight} : Props
 ) => {
-  const normal = (array: []) =>
+  const normal = (array: never[]) =>
     array?.reduce(
       (
         acc: { stats: number[]; values: number[] },
@@ -21,8 +31,8 @@ export const Charts = (
       { stats: [], values: [] }
     ) || {};
 
-  const left = normal(dataLeft);
-  const right = normal(dataRight);
+  const left: Left = normal(dataLeft);
+  const right: Right = normal(dataRight);
 
   const dataset = (label: string, data: string[], backgroundColor: string) =>
     label &&

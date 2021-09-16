@@ -4,17 +4,9 @@ import { fetchPokemons } from '../store/slicePokemons';
 
 import { Card, Sidebar } from '../components';
 import { Modal } from '../components/Modal';
+import { PokeProp } from '../interfaces/pokeList';
 
-interface PokeProp {
-  selected: undefined
-  dataFilter: never[]
-  isCompared: boolean
-  pRight: boolean
-  onClickPokemons: (url: React.SetStateAction<undefined>) => void
-  onCloseModal:  () => void
-}
-
-export function PokemonsList() {
+export const PokemonsList: React.FC = () => {
   const { selected, dataFilter, isCompared, pRight, onClickPokemons, onCloseModal } : PokeProp =
     useManager();
 
@@ -33,17 +25,17 @@ export function PokemonsList() {
   );
 }
 
-const search = (array: [], text: string) =>
+const search = (array: never[], text: string) =>
   array.filter((element: { name: string; }) => !element.name.toLowerCase().indexOf(text.toLowerCase()));
 
 const useManager = () => {
-  const [selected, setSelected] = useState();
+  const [selected, setSelected] = useState<undefined>();
   const dispatch = useDispatch();
   const { array, textFilter } = useSelector((state: RootStateOrAny) => state.pokemons);
   const { isCompared, right } = useSelector((state: RootStateOrAny) => state.modal)
   const dataFilter = search(array, textFilter);
 
-  const next = () => {
+  const next = (): void => {
     dispatch(fetchPokemons());
   }
 

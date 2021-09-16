@@ -6,18 +6,7 @@ import { Compared } from "./Compare";
 import { Charts } from "./Chart";
 import Close from "../assets/cancel.png";
 import { PokenDescription } from "./PokenDescription";
-
-/**
- * stats: [
- * {
- *  base_stat: number,
- *  stat: {
- *    name: string
- *  }
- * }
- * ]
- * hp, attack, defense, special-attack, special-defense, speed
- */
+import { Comparing } from "../interfaces/Compared";
 
 interface stats {
   acc:string[],
@@ -43,20 +32,8 @@ const normal = (stats:stats[]) =>
   ) || [];
 
 export function Modal(visible: boolean, url: string, onClose: () => void) {
-  interface Compared {
-    left: {
-      name: string;
-      stats: [];
-    };
-    right: {
-      name: string;
-      stats: [];
-    };
-    isCompared: boolean;
-    initialCompare: () => void;
-    closeAndClean: () => void;
-  }
-  const { left, right, isCompared, initialCompare, closeAndClean }: Compared =
+
+  const { left, right, isCompared, initialCompare, closeAndClean }: Comparing =
     useManager(url, onClose);
 
   const chartLeft = normal(left?.stats);

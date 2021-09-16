@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { data2, stats } from "../interfaces/sliceMod";
 
 const initialState = {
   left: null,
@@ -34,56 +35,37 @@ export const initCompare = actions.initCompare;
 export const clearModal = actions.clearModal;
 export const modalReducer = reducer;
 
-export const fetchPoken = (url: string) => async (dispatch: (arg0: { payload: unknown; type: string; }) => void, getState: () => { modal: boolean; }) => {
-  const { modal } = getState();
-  const isCompared  = modal;
-  const data = await getPokenInf(url);
-  if (isCompared) {
-    dispatch(appendRightPokemon(data));
-    return;
-  }
-  dispatch(appendLeftPokemon(data));
-};
+export const fetchPoken =
+  (url: string) =>
+  async (
+    dispatch: (arg0: { payload: unknown; type: string }) => void,
+    getState: () => { modal: boolean }
+  ) => {
+    const { modal } = getState();
+    const isCompared = modal;
+    const data = await getPokenInf(url);
+    if (isCompared) {
+      dispatch(appendRightPokemon(data));
+      return;
+    }
+    dispatch(appendLeftPokemon(data));
+  };
 
-interface data2 {
-  flavor_text_entries: flavor[];
-  gender_rate: number;
-}
-
-interface stats {
-  stats: property[]
-}
-
-interface property {
-  id: number;
-  name: string;
-  game_index?: number;
-  is_battle_only?: boolean;
-}
-
-interface flavor {
-    flavor_text: string;
-    language?: language;
-}
-interface language {
-  id: number;
-  name?: string;
-  official?: boolean;
-  iso639?: string;
-  iso3166?: string;
-}
-
-async function getPokenInf(url: string) {
+async function getPokenInf(url: string): Promise<string> {
   try {
-    const response = await fetch(url);
+    const response: Response = await fetch(url);
     const data = await response.json();
-    const response1 = await fetch(data?.species?.url);
+    const response1: Response = await fetch(data?.species?.url);
     const data2: data2 = await response1.json();
-    const abilities: string = data?.abilities.map((el: { ability: { name: string; }; }) => el?.ability?.name);
+    const abilities: string = data?.abilities.map(
+      (el: { ability: { name: string } }) => el?.ability?.name
+    );
     const stats: stats = data?.stats;
-    const types: string = data?.types.map((el: { type: { name: string; }; }) => el.type?.name);
-    const desc = data2?.flavor_text_entries[0]?.flavor_text;
-    const gender = data2?.gender_rate;
+    const types: string = data?.types.map(
+      (el: { type: { name: string } }) => el.type?.name
+    );
+    const desc: string = data2?.flavor_text_entries[0]?.flavor_text;
+    const gender: number = data2?.gender_rate;
     return {
       ...data,
       abilities,
@@ -93,6 +75,6 @@ async function getPokenInf(url: string) {
       stats,
     };
   } catch (error) {
-    return null;
+    return '';
   }
 }

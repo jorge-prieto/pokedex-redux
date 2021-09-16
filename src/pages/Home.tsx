@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import Background from "../assets/pokemon-background.png";
 
-export function Home() {
+export const Home : React.FC = ():ReactElement => {
   return (
     <div className="main-container h-4/6 md:h-4/5 lg:h-screen bg-off-white">
       <div className="home-container flex justify-center items-center">

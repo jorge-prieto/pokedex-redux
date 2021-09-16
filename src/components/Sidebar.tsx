@@ -1,7 +1,8 @@
 import { RootStateOrAny, useSelector } from "react-redux";
+import { Left } from "../interfaces/leftRight";
 
-export function Sidebar() {
-  const left = useSelector((state: RootStateOrAny) => state.modal.left);
+export const Sidebar: React.FC = () => {
+  const left: Left = useSelector((state: RootStateOrAny) => state.modal.left);
   return (
     <div className="sticky top-36 right-10 h-8">
       <div className="fixed w-1/6 right-10 bg-card border-2 border-solid">

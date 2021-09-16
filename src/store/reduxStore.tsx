@@ -15,7 +15,7 @@ type Props = {
   children: JSX.Element,
 };
 
-export function MProvider({ children }: Props) {
+export function MProvider({ children }: Props) :JSX.Element {
   return (
     <Provider store={store}>{children}</Provider>
   )
