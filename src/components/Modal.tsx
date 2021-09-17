@@ -22,7 +22,7 @@ interface stat {
   url: string;
 }
 
-const normal = (stats:stats[]) =>
+const normal = (stats:stats[]) : string[] =>
   stats?.reduce(
     (acc, elements) => [
       ...acc,

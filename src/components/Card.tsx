@@ -8,7 +8,7 @@ interface Card {
   onClick: (url: React.SetStateAction<undefined>) => void;
 }
 
-export const Card: React.FC<Card> = ({ name, url, onClick }: Card) => {
+export const Card: React.FC<Card> = ({ name, url, onClick }: Card) : JSX.Element => {
   const image = images + getIdFromPokenUrl(url) + ".png";
 
   const pressed = (event: { preventDefault: () => void }) => {

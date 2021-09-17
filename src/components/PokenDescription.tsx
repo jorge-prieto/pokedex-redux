@@ -1,10 +1,10 @@
 import React from "react";
 import { List } from "./List";
 import { getImage } from "../helper/helps";
-import { Left } from "../interfaces/leftRight";
+import { Properties } from "../interfaces/leftRight";
 
 
-export const PokenDescription: React.FC<Left>= ({
+export const PokenDescription: React.FC<Properties>= ({
   id,
   desc,
   height,
@@ -12,7 +12,7 @@ export const PokenDescription: React.FC<Left>= ({
   gender,
   abilities,
   types,
-}: Left) => {
+}: Properties) : JSX.Element => {
   return (
     <div className="flex justify-center items-center flex-row mt-4">
       <div>

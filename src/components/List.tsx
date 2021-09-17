@@ -4,7 +4,7 @@ interface data {
   data: unknown[]
 }
 
-export const List: React.FC<data> = (data: data) => {
+export const List: React.FC<data> = (data: data): JSX.Element => {
   return (
     <ul>
       {data?.map((element: string, index: number) => (

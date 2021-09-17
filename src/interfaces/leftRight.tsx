@@ -1,17 +1,4 @@
-export interface Left {
-  id: number;
-  name: string;
-  desc: string;
-  height: number;
-  weight: number;
-  gender: number;
-  abilities: abilities[];
-  types: types[];
-  stats: stats[];
-  values: string[];
-}
-
-export interface Right {
+export interface Properties {
   id: number;
   name: string;
   desc: string;

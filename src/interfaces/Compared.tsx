@@ -1,8 +1,8 @@
-import { Left, Right } from "./leftRight";
+import { Properties } from "./leftRight";
 
 export interface Comparing {
-    left: Left;
-    right: Right;
+    left: Properties;
+    right: Properties;
     isCompared: boolean;
     initialCompare: () => void;
     closeAndClean: () => void;
